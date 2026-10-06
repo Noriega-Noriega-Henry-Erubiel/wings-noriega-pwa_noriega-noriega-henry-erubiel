@@ -1,0 +1,168 @@
+/* ===== Paleta de marca Wings Noriega ===== */
+:root {
+  --negro: #1a1a1a;
+  --negro-suave: #262626;
+  --naranja: #ea580c;
+  --naranja-oscuro: #c2410c;
+  --amarillo: #facc15;
+  --blanco: #ffffff;
+  --gris: #a3a3a3;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--negro);
+  color: var(--blanco);
+  line-height: 1.4;
+}
+
+/* ===== Encabezado ===== */
+.encabezado {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--negro);
+  border-bottom: 4px solid var(--naranja);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.encabezado h1 {
+  font-size: 1.5rem;
+  color: var(--naranja);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.lema {
+  font-size: 0.85rem;
+  color: var(--amarillo);
+}
+
+/* ===== Catálogo ===== */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+main h2 {
+  color: var(--amarillo);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.estado {
+  color: var(--gris);
+  margin-bottom: 12px;
+}
+
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.tarjeta {
+  background: var(--negro-suave);
+  border: 1px solid #3f3f3f;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.tarjeta-cuerpo {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.categoria {
+  font-size: 0.7rem;
+  color: var(--naranja);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.tarjeta h3 {
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--amarillo);
+}
+
+.btn-agregar {
+  background: var(--naranja);
+  color: var(--blanco);
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-agregar:hover {
+  background: var(--naranja-oscuro);
+}
+
+/* ===== Pie de página ===== */
+.pie {
+  margin-top: 24px;
+  padding: 16px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gris);
+  border-top: 4px solid var(--naranja);
+}
+
+.pie strong {
+  color: var(--amarillo);
+}
+
+/* ===== Responsivo: tablet y escritorio ===== */
+@media (min-width: 600px) {
+  .catalogo {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 900px) {
+  .catalogo {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .encabezado h1 {
+    font-size: 2rem;
+  }
+}
