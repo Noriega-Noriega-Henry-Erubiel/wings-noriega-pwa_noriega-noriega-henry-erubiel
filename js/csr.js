@@ -1,37 +1,51 @@
-// csr.js — Client Side Rendering: carga catalogo.json y pinta las tarjetas
+// csr.js — Renderizado en el Cliente (CSR)
+// "CSR" significa que el HTML llega casi vacío y es ESTE archivo JavaScript,
+// ya corriendo en el navegador del usuario, quien construye el contenido.
 
-const contenedor = document.getElementById('catalogo');
-const estado = document.getElementById('estado');
+// 1) Buscamos el contenedor vacío que dejamos en index.html
+const contenedorCatalogo = document.getElementById("catalogo");
 
-// Arma el HTML de una tarjeta de producto
-function crearTarjeta(producto) {
-  return `
-    <article class="tarjeta">
-      <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" width="600" height="450">
-      <div class="tarjeta-cuerpo">
+// 2) fetch() le pide el archivo catalogo.json al servidor (aquí simula una API real).
+//    fetch() devuelve una "promesa": un valor que llegará más adelante, no de inmediato.
+fetch("catalogo.json")
+  .then((respuesta) => respuesta.json()) // convierte el texto recibido en un array de objetos JS
+  .then((productos) => {
+    // 3) Ya tenemos los productos: borramos las tarjetas esqueleto y dibujamos las reales
+    contenedorCatalogo.innerHTML = "";
+    contenedorCatalogo.removeAttribute("aria-busy");
+    contenedorCatalogo.removeAttribute("aria-label");
+
+    productos.forEach((producto) => {
+      // creamos un <div class="producto"> por cada producto, desde JavaScript puro
+      const tarjeta = document.createElement("div");
+      tarjeta.className = "producto";
+
+      // usamos el propio objeto "producto" para llenar el texto (sin plantillas de servidor)
+      tarjeta.innerHTML = `
+        <img class="producto__foto" src="${producto.imagen}" alt="${producto.nombre}" loading="lazy">
         <span class="categoria">${producto.categoria}</span>
-        <h3>${producto.nombre}</h3>
-        <p class="precio">$${producto.precio}</p>
-        <button class="btn-agregar" data-id="${producto.id}">Agregar</button>
-      </div>
-    </article>
-  `;
-}
+        <strong>${producto.nombre}</strong>
+        <span class="precio">$${producto.precio}</span>
+        <p>Stock: ${producto.stock}</p>
+        <button type="button" data-id="${producto.id}">Agregar al carrito</button>
+      `;
 
-// Pide el catálogo con fetch() y lo muestra en la página
-async function cargarCatalogo() {
-  try {
-    const respuesta = await fetch('catalogo.json');
-    if (!respuesta.ok) {
-      throw new Error('No se pudo cargar el catálogo');
-    }
-    const productos = await respuesta.json();
+      contenedorCatalogo.appendChild(tarjeta);
 
-    contenedor.innerHTML = productos.map(crearTarjeta).join('');
-    estado.textContent = `${productos.length} productos disponibles`;
-  } catch (error) {
-    estado.textContent = 'No se pudo cargar el catálogo. Intenta de nuevo.';
-  }
-}
-
-cargarCatalogo();
+      // conectamos el botón recién creado con la función agregarAlCarrito() de carrito.js.
+      // carrito.js llega en el avance 2: mientras no exista, el botón no hace nada
+      // (así no sale un error en la consola al hacer clic).
+      tarjeta.querySelector("button").addEventListener("click", () => {
+        if (typeof agregarAlCarrito === "function") {
+          agregarAlCarrito(producto);
+        }
+      });
+    });
+  })
+  .catch((error) => {
+    // si algo falla (por ejemplo, sin conexión y sin caché), avisamos en pantalla
+    contenedorCatalogo.innerHTML = "<p>No se pudo cargar el catálogo. Intenta más tarde.</p>";
+    contenedorCatalogo.removeAttribute("aria-busy");
+    contenedorCatalogo.removeAttribute("aria-label");
+    console.error("Error al cargar catálogo:", error);
+  });

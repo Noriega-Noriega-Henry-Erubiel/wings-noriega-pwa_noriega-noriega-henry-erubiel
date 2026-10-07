@@ -1,168 +1,150 @@
-/* ===== Paleta de marca Wings Noriega ===== */
-:root {
-  --negro: #1a1a1a;
-  --negro-suave: #262626;
-  --naranja: #ea580c;
-  --naranja-oscuro: #c2410c;
-  --amarillo: #facc15;
-  --blanco: #ffffff;
-  --gris: #a3a3a3;
-}
+/* Paleta de marca Wings Noriega (guía del giro):
+   naranja #EA580C · negro #1C1917 · amarillo #FACC15 */
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; }
 
 body {
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  background: var(--negro);
-  color: var(--blanco);
-  line-height: 1.4;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #1c1917;
+  color: #fafaf9;
 }
 
-/* ===== Encabezado ===== */
-.encabezado {
+.appbar {
+  background: #1c1917;
+  color: white;
+  padding: .75rem 1.25rem;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: var(--negro);
-  border-bottom: 4px solid var(--naranja);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  justify-content: space-between;
+  gap: .75rem;
+  border-bottom: 4px solid #ea580c;
 }
-
-.logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-}
-
-.encabezado h1 {
-  font-size: 1.5rem;
-  color: var(--naranja);
+.appbar__marca { display: flex; align-items: center; gap: .75rem; }
+.appbar__logo { width: 56px; height: 56px; border-radius: 50%; }
+.appbar h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #ea580c;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+.appbar__lema { margin: 0; font-size: .8rem; color: #facc15; }
 
-.lema {
-  font-size: 0.85rem;
-  color: var(--amarillo);
+/* .pill: la "píldora" que muestra si hay conexión o no (la mueve app.js) */
+.pill {
+  background: rgba(255,255,255,.12);
+  border-radius: 999px;
+  padding: .25rem .75rem;
+  font-size: .8rem;
+  white-space: nowrap;
 }
+.pill.sin-conexion { background: #c2410c; } /* naranja oscuro: 5.2:1 con texto blanco */
 
-/* ===== Catálogo ===== */
 main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px;
+  max-width: 960px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
 }
 
-main h2 {
-  color: var(--amarillo);
-  margin-bottom: 12px;
-  text-transform: uppercase;
+section {
+  background: #292524;
+  border: 1px solid #44403c;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
 }
+section h2 { margin-top: 0; color: #facc15; text-transform: uppercase; font-size: 1.15rem; }
 
-.estado {
-  color: var(--gris);
-  margin-bottom: 12px;
-}
-
-.catalogo {
+/* .grid: acomoda las tarjetas de producto en columnas que se ajustan solas.
+   Con minmax(140px) caben 2 columnas en un celular de 375 px */
+.grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: .75rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 }
 
-.tarjeta {
-  background: var(--negro-suave);
-  border: 1px solid #3f3f3f;
-  border-radius: 12px;
-  overflow: hidden;
+.producto {
+  background: #1c1917;
+  border: 1px solid #44403c;
+  border-radius: 8px;
+  padding: .75rem;
   display: flex;
   flex-direction: column;
 }
-
-.tarjeta img {
+.producto__foto {
+  display: block;
   width: 100%;
-  height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  display: block;
+  border-radius: 6px;
+  margin-bottom: .5rem;
+  background: #44403c;
 }
-
-.tarjeta-cuerpo {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-}
-
-.categoria {
-  font-size: 0.7rem;
-  color: var(--naranja);
+.producto .categoria {
+  color: #ea580c;
+  font-size: .7rem;
+  font-weight: bold;
   text-transform: uppercase;
-  font-weight: bold;
 }
+.producto strong { display: block; margin-bottom: .25rem; }
+.producto .precio { color: #facc15; font-weight: bold; font-size: 1.15rem; }
+.producto p { margin: .25rem 0 .6rem; color: #d6d3d1; font-size: .85rem; flex: 1; }
 
-.tarjeta h3 {
-  font-size: 0.95rem;
-  flex: 1;
+/* Tarjetas esqueleto (ver index.html): ocupan el mismo espacio que las reales
+   mientras llega catalogo.json, así nada se mueve de lugar */
+.producto--cargando strong,
+.producto--cargando .precio,
+.producto--cargando p {
+  background: #44403c;
+  border-radius: 4px;
+  color: transparent;
 }
+.producto--cargando strong { width: 70%; }
+.producto--cargando .precio { display: inline-block; width: 30%; }
+.producto--cargando p { width: 45%; }
+.producto--cargando button { visibility: hidden; }
 
-.precio {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--amarillo);
-}
-
-.btn-agregar {
-  background: var(--naranja);
-  color: var(--blanco);
+/* #c2410c en vez de #ea580c en los botones: con texto blanco da contraste 5.2:1 */
+button {
+  background: #c2410c;
+  color: white;
   border: none;
   border-radius: 8px;
-  padding: 10px;
-  font-size: 0.95rem;
-  font-weight: bold;
+  padding: .55rem 1rem;
   cursor: pointer;
+  font-size: .9rem;
+  font-weight: bold;
+}
+button:hover { background: #9a3412; }
+
+.mensaje { color: #d6d3d1; font-size: .9rem; min-height: 1.2em; }
+.mensaje a { color: #facc15; }
+
+.sucursal-info { color: #d6d3d1; font-size: .9rem; margin: 0 0 .6rem; }
+
+/* .mapa: contenedor de Leaflet. Necesita una altura explícita en px/rem */
+.mapa {
+  height: 260px;
+  border-radius: 8px;
+  margin-top: .75rem;
+  border: 1px solid #44403c;
 }
 
-.btn-agregar:hover {
-  background: var(--naranja-oscuro);
-}
+#carrito-lista { list-style: none; padding: 0; }
 
-/* ===== Pie de página ===== */
-.pie {
-  margin-top: 24px;
-  padding: 16px;
+footer {
   text-align: center;
-  font-size: 0.8rem;
-  color: var(--gris);
-  border-top: 4px solid var(--naranja);
+  font-size: .8rem;
+  color: #d6d3d1;
+  padding: 1rem;
+  border-top: 4px solid #ea580c;
 }
+footer p { margin: .25rem 0; }
+footer strong { color: #facc15; }
 
-.pie strong {
-  color: var(--amarillo);
-}
-
-/* ===== Responsivo: tablet y escritorio ===== */
-@media (min-width: 600px) {
-  .catalogo {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-}
-
-@media (min-width: 900px) {
-  .catalogo {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .encabezado h1 {
-    font-size: 2rem;
-  }
+@media (max-width: 480px) {
+  .appbar { padding: .6rem .9rem; }
+  .appbar h1 { font-size: 1.1rem; }
+  section { padding: .9rem; }
 }
