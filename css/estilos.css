@@ -131,7 +131,68 @@ button:hover { background: #9a3412; }
   border: 1px solid #44403c;
 }
 
+/* Botones de categoría (csr.js los crea encima del catálogo) */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+.filtros button {
+  background: transparent;
+  color: #facc15;
+  border: 1px solid #facc15;
+}
+.filtros button:hover { background: rgba(250,204,21,.12); }
+.filtros button[aria-pressed="true"] {
+  background: #facc15;
+  color: #1c1917;
+}
+
+/* .producto usa display:flex, que le gana al atributo hidden del navegador;
+   esta regla hace que el filtro sí pueda ocultar las tarjetas */
+.producto[hidden] { display: none; }
+
+/* #carrito-lista: cada renglón separa nombre / cantidad (con +/-) / precio /
+   quitar en columnas propias */
 #carrito-lista { list-style: none; padding: 0; }
+#carrito-lista li {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: .6rem;
+  border-bottom: 1px solid #44403c;
+  padding: .5rem 0;
+}
+
+.carrito-nombre { font-weight: 600; }
+
+.carrito-cantidad {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.carrito-cantidad button {
+  padding: .1rem .55rem;
+  font-size: .95rem;
+  line-height: 1.4;
+}
+.carrito-cantidad__valor {
+  min-width: 1.4rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.carrito-precio { font-weight: bold; color: #facc15; white-space: nowrap; }
+
+.carrito-quitar {
+  background: transparent;
+  color: #fca5a5;
+  border: 1px solid #7f1d1d;
+  padding: .25rem .6rem;
+  font-size: .8rem;
+}
+.carrito-quitar:hover { background: #450a0a; color: #fecaca; }
 
 footer {
   text-align: center;
@@ -147,4 +208,11 @@ footer strong { color: #facc15; }
   .appbar { padding: .6rem .9rem; }
   .appbar h1 { font-size: 1.1rem; }
   section { padding: .9rem; }
+
+  /* En pantallas angostas el renglón del carrito pasa a dos columnas */
+  #carrito-lista li { grid-template-columns: 1fr auto; grid-template-areas: "nombre nombre" "cantidad precio" "quitar quitar"; }
+  .carrito-nombre { grid-area: nombre; }
+  .carrito-cantidad { grid-area: cantidad; }
+  .carrito-precio { grid-area: precio; justify-self: end; }
+  .carrito-quitar { grid-area: quitar; justify-self: start; }
 }

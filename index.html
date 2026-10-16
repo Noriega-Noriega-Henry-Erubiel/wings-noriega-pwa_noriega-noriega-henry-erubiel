@@ -73,7 +73,7 @@
       </div>
     </section>
 
-    <!-- ---- Sección 2: Carrito (funciona a partir del avance 2, con carrito.js) ---- -->
+    <!-- ---- Sección 2: Carrito (lo maneja carrito.js) ---- -->
     <section>
       <h2>Carrito</h2>
       <ul id="carrito-lista"></ul>
@@ -108,8 +108,8 @@
   <!-- Cargamos los scripts al final del <body>: así el HTML ya existe
        cuando el JavaScript intenta buscar los elementos con document.getElementById -->
   <!-- Los archivos que aún no existen quedan comentados y se activan conforme
-       se crean: carrito.js en el avance 2 y los demás en el avance 3 -->
-  <!-- <script src="js/carrito.js"></script> -->
+       se crean: notificaciones.js, Leaflet, geolocalizacion.js y app.js en el avance 3 -->
+  <script src="js/carrito.js"></script>
   <script src="js/csr.js"></script>
   <!-- <script src="js/notificaciones.js"></script> -->
   <!-- Leaflet debe cargar ANTES de geolocalizacion.js: ese script usa el
