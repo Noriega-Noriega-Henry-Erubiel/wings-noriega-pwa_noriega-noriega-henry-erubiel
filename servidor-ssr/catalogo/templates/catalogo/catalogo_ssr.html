@@ -1,0 +1,38 @@
+<!-- Plantilla Django: mezcla HTML normal con etiquetas especiales de Django -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wings Noriega — Catálogo (SSR)</title>
+  <style>
+    /* Estilos mínimos con los colores de la marca, solo para que se lea bien */
+    body { font-family: system-ui, sans-serif; background: #1c1917; color: #fafaf9; margin: 2rem; }
+    h1 { color: #ea580c; }
+    h2 { color: #facc15; font-size: 1.1rem; margin-top: 1.5rem; }
+    ul { list-style: none; padding: 0; }
+    li { background: #292524; border: 1px solid #44403c; border-radius: 8px; padding: .75rem 1rem; margin-bottom: .5rem; }
+    .precio { font-weight: bold; color: #facc15; }
+  </style>
+</head>
+<body>
+  <h1>Wings Noriega · Catálogo renderizado en el servidor (SSR)</h1>
+  <p>Este HTML ya viene con los productos escritos. Haz "Ver código fuente" (Ctrl+U) y
+     compara: aquí SÍ aparecen los nombres y precios en el HTML crudo.</p>
+
+  <!-- regroup agrupa la lista "productos" por su categoría: un bloque por cada una -->
+  {% regroup productos by categoria as grupos %}
+  {% for grupo in grupos %}
+    <h2>{{ grupo.grouper }}</h2>
+    <ul>
+      {% for producto in grupo.list %}
+        <li>
+          <strong>{{ producto.nombre }}</strong> —
+          <span class="precio">${{ producto.precio }}</span>
+          (stock: {{ producto.stock }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</body>
+</html>
