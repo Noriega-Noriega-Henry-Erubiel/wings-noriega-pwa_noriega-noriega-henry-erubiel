@@ -82,7 +82,7 @@
       <p id="carrito-mensaje" class="mensaje"></p>
     </section>
 
-    <!-- ---- Sección 3: Notificaciones (avance 3, con notificaciones.js) ---- -->
+    <!-- ---- Sección 3: Notificaciones (las maneja notificaciones.js) ---- -->
     <section>
       <h2>Notificaciones de ofertas</h2>
       <button id="btn-notificar" type="button">Activar notificaciones</button>
@@ -108,10 +108,10 @@
   <!-- Cargamos los scripts al final del <body>: así el HTML ya existe
        cuando el JavaScript intenta buscar los elementos con document.getElementById -->
   <!-- Los archivos que aún no existen quedan comentados y se activan conforme
-       se crean: notificaciones.js, Leaflet, geolocalizacion.js y app.js en el avance 3 -->
+       se crean: Leaflet, geolocalizacion.js y app.js en el avance 3 -->
   <script src="js/carrito.js"></script>
   <script src="js/csr.js"></script>
-  <!-- <script src="js/notificaciones.js"></script> -->
+  <script src="js/notificaciones.js"></script>
   <!-- Leaflet debe cargar ANTES de geolocalizacion.js: ese script usa el
        objeto global "L" que esta librería crea -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script> -->

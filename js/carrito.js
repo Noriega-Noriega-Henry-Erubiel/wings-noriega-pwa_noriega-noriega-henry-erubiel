@@ -28,6 +28,11 @@ function agregarAlCarrito(producto) {
 
   guardarCarrito(carrito);
   pintarCarrito();
+
+  // Aviso útil al cliente (solo aparece si activó las notificaciones; ver notificaciones.js)
+  if (typeof notificar === "function") {
+    notificar("Pedido agregado", `${producto.nombre} · $${producto.precio}`);
+  }
 }
 
 // Sube o baja la cantidad de un producto ya en el carrito con los botones +/-;
@@ -100,6 +105,7 @@ function manejarClicCarrito(evento) {
 // servidor. Aquí lo simulamos para enseñar el patrón offline -> online.
 function sincronizarCarrito() {
   const mensaje = document.getElementById("carrito-mensaje");
+  const carrito = leerCarrito();
 
   if (!navigator.onLine) {
     // navigator.onLine: propiedad del navegador que dice si hay conexión
@@ -107,8 +113,19 @@ function sincronizarCarrito() {
     return;
   }
 
-  // Aquí iría: fetch("https://mi-api.com/carrito", { method: "POST", body: ... })
-  mensaje.textContent = "Carrito sincronizado con el servidor (simulado). ✓";
+  if (carrito.length === 0) {
+    mensaje.textContent = "Tu carrito está vacío: no hay nada que sincronizar.";
+    return;
+  }
+
+  // Aquí iría: fetch("https://mi-api.com/carrito", { method: "POST", body: JSON.stringify(carrito) })
+  const piezas = carrito.reduce((suma, item) => suma + item.cantidad, 0);
+  mensaje.textContent = `Carrito sincronizado con el servidor (simulado): ${piezas} producto(s) enviados. ✓`;
+
+  // Además del mensaje en pantalla, avisamos con una notificación (si hay permiso)
+  if (typeof notificar === "function") {
+    notificar("Carrito sincronizado", `Se enviaron ${piezas} producto(s) de tu pedido a Wings Noriega.`);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
