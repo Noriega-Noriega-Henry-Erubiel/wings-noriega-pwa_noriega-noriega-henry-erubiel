@@ -10,7 +10,7 @@ function notificar(titulo, cuerpo) {
 
   new Notification(titulo, {
     body: cuerpo,
-    icon: "img/logo.png",
+    icon: "icons/icon-192.png",
   });
 }
 

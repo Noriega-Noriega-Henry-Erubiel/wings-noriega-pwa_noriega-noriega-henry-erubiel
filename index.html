@@ -8,18 +8,16 @@
        resultados de búsqueda (Lighthouse la revisa en la categoría SEO) -->
   <meta name="description" content="Wings Noriega: alitas y boneless con fuego. Catálogo de productos, carrito de compras y ubicación de la sucursal, disponible incluso sin conexión.">
 
-  <!-- Estas líneas son las que convierten este sitio en una PWA instalable.
-       manifest.json e icons/icon.svg todavía no existen: se activan en el avance 3 -->
-  <!-- <link rel="manifest" href="manifest.json"> -->
+  <!-- Estas 3 líneas son las que convierten este sitio en una PWA instalable -->
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1c1917">
-  <!-- <link rel="icon" href="icons/icon.svg" type="image/svg+xml"> -->
-  <link rel="icon" href="img/logo.png" type="image/png">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 
   <link rel="stylesheet" href="css/estilos.css">
 
   <!-- Leaflet: librería de mapas gratuita (sin API key) para dibujar la ruta
-       hasta la sucursal (ver js/geolocalizacion.js). Se activa en el avance 3 -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"> -->
+       hasta la sucursal (ver js/geolocalizacion.js) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 </head>
 <body>
 
@@ -89,10 +87,10 @@
       <p id="notificaciones-mensaje" class="mensaje"></p>
     </section>
 
-    <!-- ---- Sección 4: Ubicación (avance 3, con geolocalizacion.js) ---- -->
+    <!-- ---- Sección 4: Ubicación (la maneja geolocalizacion.js) ---- -->
     <section>
       <h2>Distancia a la sucursal</h2>
-      <p class="sucursal-info">Sucursal única: <strong>Wings Noriega</strong>, Av. del Estadio 210, Col. Centro.</p>
+      <p class="sucursal-info">Sucursal única: <strong>Wings Noriega</strong>, Boulevard Progreso, Hermosillo, Sonora.</p>
       <button id="btn-ubicacion" type="button">Usar mi ubicación</button>
       <p id="ubicacion-mensaje" class="mensaje"></p>
       <!-- Empieza oculto: geolocalizacion.js le quitará "hidden" y lo llenará de mapa -->
@@ -108,14 +106,14 @@
   <!-- Cargamos los scripts al final del <body>: así el HTML ya existe
        cuando el JavaScript intenta buscar los elementos con document.getElementById -->
   <!-- Los archivos que aún no existen quedan comentados y se activan conforme
-       se crean: Leaflet, geolocalizacion.js y app.js en el avance 3 -->
+       se crean: app.js y el registro del Service Worker en el avance 3 -->
   <script src="js/carrito.js"></script>
   <script src="js/csr.js"></script>
   <script src="js/notificaciones.js"></script>
   <!-- Leaflet debe cargar ANTES de geolocalizacion.js: ese script usa el
        objeto global "L" que esta librería crea -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script> -->
-  <!-- <script src="js/geolocalizacion.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="js/geolocalizacion.js"></script>
   <!-- <script src="js/app.js"></script> -->
   <!-- Registro del Service Worker (se activa en el avance 3, cuando exista sw.js) -->
   <!--

@@ -1,0 +1,33 @@
+{
+  "id": "./",
+  "name": "Wings Noriega — Alitas y Boneless",
+  "short_name": "Wings Noriega",
+  "description": "PWA de ventas de Wings Noriega: alitas y boneless con fuego. Catálogo, carrito y ubicación de la sucursal, incluso sin conexión.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["food", "shopping"],
+  "background_color": "#1c1917",
+  "theme_color": "#1c1917",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
