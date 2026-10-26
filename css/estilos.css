@@ -100,6 +100,7 @@ section h2 { margin-top: 0; color: #facc15; text-transform: uppercase; font-size
   border-radius: 4px;
   color: transparent;
 }
+.producto--cargando .categoria { display: block; width: 50%; background: #44403c; border-radius: 4px; }
 .producto--cargando strong { width: 70%; }
 .producto--cargando .precio { display: inline-block; width: 30%; }
 .producto--cargando p { width: 45%; }
@@ -147,6 +148,14 @@ button:hover { background: #9a3412; }
 .filtros button[aria-pressed="true"] {
   background: #facc15;
   color: #1c1917;
+}
+
+/* Barra de filtros "esqueleto" (index.html): mismo tamaño que la real, sin texto visible */
+.filtros--cargando button {
+  color: transparent;
+  border-color: #44403c;
+  background: #44403c;
+  cursor: default;
 }
 
 /* .producto usa display:flex, que le gana al atributo hidden del navegador;

@@ -15,15 +15,19 @@ fetch("catalogo.json")
     contenedorCatalogo.removeAttribute("aria-busy");
     contenedorCatalogo.removeAttribute("aria-label");
 
-    productos.forEach((producto) => {
+    productos.forEach((producto, indice) => {
       // creamos un <div class="producto"> por cada producto, desde JavaScript puro
       const tarjeta = document.createElement("div");
       tarjeta.className = "producto";
       tarjeta.dataset.categoria = producto.categoria; // queda como data-categoria="..." en el HTML
 
+      // Las 4 primeras fotos se ven al abrir la página: se cargan de inmediato ("eager").
+      // Las demás esperan a que el usuario haga scroll ("lazy") para no gastar datos.
+      const carga = indice < 4 ? "eager" : "lazy";
+
       // usamos el propio objeto "producto" para llenar el texto (sin plantillas de servidor)
       tarjeta.innerHTML = `
-        <img class="producto__foto" src="${producto.imagen}" alt="${producto.nombre}" loading="lazy">
+        <img class="producto__foto" src="${producto.imagen}" alt="${producto.nombre}" width="480" height="360" loading="${carga}">
         <span class="categoria">${producto.categoria}</span>
         <strong>${producto.nombre}</strong>
         <span class="precio">$${producto.precio}</span>
@@ -79,6 +83,8 @@ function crearFiltros(productos) {
     barra.appendChild(boton);
   });
 
-  // la barra va justo antes del contenedor del catálogo
+  // la barra real reemplaza a la barra "esqueleto" de index.html, que solo apartaba
+  // el espacio; va justo antes del contenedor del catálogo
+  document.querySelector(".filtros--cargando")?.remove();
   contenedorCatalogo.before(barra);
 }

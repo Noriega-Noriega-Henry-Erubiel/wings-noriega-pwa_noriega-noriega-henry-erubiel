@@ -17,7 +17,9 @@
 
   <!-- Leaflet: librería de mapas gratuita (sin API key) para dibujar la ruta
        hasta la sucursal (ver js/geolocalizacion.js) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <!-- media="print" + onload: el CSS del mapa se descarga sin bloquear el primer
+       pintado de la página (el mapa solo se usa al presionar "Usar mi ubicación") -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
 </head>
 <body>
 
@@ -46,25 +48,105 @@
       <!-- Este div empieza VACÍO a propósito: si ves el código fuente (Ctrl+U)
            no verás ningún producto aquí. JavaScript (csr.js) lo llena DESPUÉS
            de que la página ya cargó: por eso es "Renderizado en el Cliente" (CSR). -->
-      <!-- Mientras llegan los datos, unas tarjetas "esqueleto" apartan el espacio -->
+      <!-- Mientras llegan los datos, 15 tarjetas "esqueleto" (una por producto de
+           catalogo.json) apartan el espacio: así nada "brinca" cuando csr.js dibuja
+           los productos (Lighthouse lo mide como CLS) -->
+      <!-- Barra de filtros "esqueleto": aparta el mismo espacio que la barra real
+           que crea csr.js, para que el catálogo no brinque hacia abajo al aparecer -->
+      <div class="filtros filtros--cargando" aria-hidden="true">
+        <button type="button" disabled>Todos</button>
+        <button type="button" disabled>Alitas (10 pzs)</button>
+        <button type="button" disabled>Boneless y más</button>
+        <button type="button" disabled>Bebidas y extras</button>
+      </div>
       <div id="catalogo" class="grid" aria-busy="true" aria-label="Cargando catálogo">
         <div class="producto producto--cargando" aria-hidden="true">
           <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
           <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
           <button type="button" disabled>Agregar al carrito</button>
         </div>
         <div class="producto producto--cargando" aria-hidden="true">
           <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
           <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
           <button type="button" disabled>Agregar al carrito</button>
         </div>
         <div class="producto producto--cargando" aria-hidden="true">
           <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
           <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
           <button type="button" disabled>Agregar al carrito</button>
         </div>
         <div class="producto producto--cargando" aria-hidden="true">
           <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <span class="categoria">&nbsp;</span>
           <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
           <button type="button" disabled>Agregar al carrito</button>
         </div>
