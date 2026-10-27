@@ -8,10 +8,14 @@
        resultados de búsqueda (Lighthouse la revisa en la categoría SEO) -->
   <meta name="description" content="Wings Noriega: alitas y boneless con fuego. Catálogo de productos, carrito de compras y ubicación de la sucursal, disponible incluso sin conexión.">
 
-  <!-- Estas 3 líneas son las que convierten este sitio en una PWA instalable -->
+  <!-- Estas líneas son las que convierten este sitio en una PWA instalable -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1c1917">
-  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <!-- Favicon en PNG: el icon.svg (logo incrustado como imagen) hacía que el navegador
+       de prueba de PWABuilder se cerrara y no pudiera revisar el modo offline -->
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <!-- Ícono que usa el iPhone al "Agregar a inicio" desde Safari -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
 
   <link rel="stylesheet" href="css/estilos.css">
 
