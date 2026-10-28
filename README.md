@@ -52,12 +52,15 @@ Desde el navegador, con este link: https://noriega-noriega-henry-erubiel.github.
 Si no tienes el link, la puedes buscar con el nombre (Wings Noriega). Desde ahí la puedes descargar en tu celular.
 
 ### Cómo instalarla en el celular
-Nomás abres la app en el navegador y aparece la opción de descargar la aplicación.
+**Android:** nomás abres la app en el navegador y aparece la opción de descargar la aplicación.
+
+**iPhone:** tienes que entrar en Safari → Compartir y de ahí "Agregar a inicio".
 
 ### Cómo usarla
+- **Filtros:** son los que especifican qué es lo que quieres buscar, como las alitas, boneless y bebidas y extras.
 - **Carrito:** nomás agregas el producto que quieras.
 - **Notificaciones:** ahí tienes una opción para activarlas.
 - **Ubicación:** también ahí tienes una opción para poder verla.
 
 ### Si se va el internet
-La aplicación sigue funcionando, según yo.
+La aplicación sigue funcionando sin internet.
