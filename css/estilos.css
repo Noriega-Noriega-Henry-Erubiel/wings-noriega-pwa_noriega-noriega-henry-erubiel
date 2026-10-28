@@ -75,6 +75,9 @@ section h2 { margin-top: 0; color: #facc15; text-transform: uppercase; font-size
 .producto__foto {
   display: block;
   width: 100%;
+  /* height: auto es obligatorio: sin él, el atributo height="360" de la <img>
+     le gana al aspect-ratio y la foto sale estirada a lo alto en el celular */
+  height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 6px;
