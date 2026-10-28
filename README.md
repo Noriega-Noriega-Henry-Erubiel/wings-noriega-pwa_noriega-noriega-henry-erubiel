@@ -43,3 +43,21 @@
 
 ### Mi app instalada en el celular
 ![App instalada en el celular](docs/captura-celular.png)
+
+## Guía de instalación
+
+### Dónde abrirla
+Desde el navegador, con este link: https://noriega-noriega-henry-erubiel.github.io/wings-noriega-pwa_noriega-noriega-henry-erubiel/
+
+Si no tienes el link, la puedes buscar con el nombre (Wings Noriega). Desde ahí la puedes descargar en tu celular.
+
+### Cómo instalarla en el celular
+Nomás abres la app en el navegador y aparece la opción de descargar la aplicación.
+
+### Cómo usarla
+- **Carrito:** nomás agregas el producto que quieras.
+- **Notificaciones:** ahí tienes una opción para activarlas.
+- **Ubicación:** también ahí tienes una opción para poder verla.
+
+### Si se va el internet
+La aplicación sigue funcionando, según yo.
